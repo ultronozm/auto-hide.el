@@ -1,0 +1,40 @@
+#+title: auto-hide.el: Automatically hide function bodies
+#+author: Paul D. Nelson
+
+* Overview
+
+=auto-hide= is an Emacs package that automatically hides function bodies in various programming languages using tree-sitter, enhancing code readability.  It was written in response to https://matklad.github.io/2024/10/14/missing-ide-feature.html, so you can look there for screenshots that give a rough idea of what it does.
+
+It is a light wrapper around the built-in [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hideshow.html][Hideshow]] package.  It supports Rust, C++, Javascript and Python "out of the box".
+
+* Requirements
+
+Emacs 29.1 or later with tree-sitter support.
+
+* Installation
+
+Install =auto-hide= by downloading the source and using =M-x package-install-file=, or through your preferred package manager.  
+
+* Customization
+
+Customize =auto-hide-language-config= to add support for additional languages or modify existing configurations.  To customize which major modes use auto-hide, adjust the =auto-hide-modes= variable.
+
+* Usage
+
+After installing the package, you can enable it globally with:
+
+#+begin_src emacs-lisp
+(global-auto-hide-mode)
+#+end_src
+
+This activates the [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hideshow.html][Hideshow]] package in the supported buffers and provides the following keybindings:
+
+- =C-c @ t=: Hide all function bodies in the current buffer
+- =C-c @ s=: Show the function body at point
+- =C-c @ d=: Hide the function body at point
+- =C-c @ e=: Toggle visibility of the function body at point
+
+These shadow some related bindings in [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hideshow.html][Hideshow]], which contains other useful bindings, e.g.:
+- =C-c @ C-a=: Show all.
+
+Auto-hide integrates with =xref-find-definitions=, automatically showing function bodies when jumping to definitions (typically via =M-.=).  By default, pressing =M-.= repeatedly on the name of a function will toggle visibility of the function body.  You can disable this feature by setting =auto-hide-xref-integration= to =nil=.
