@@ -63,6 +63,8 @@ for the function body within the function node."
   :type '(alist :key-type symbol
                 :value-type (alist :key-type symbol :value-type string)))
 
+(defvar auto-hide-modes)
+
 (defun auto-hide--update-hooks (enable)
   "Update hooks for all modes in `auto-hide-modes'.
 If ENABLE is non-nil, add hooks; otherwise, remove them."
