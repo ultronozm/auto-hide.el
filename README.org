@@ -47,4 +47,4 @@ This activates the [[https://www.gnu.org/software/emacs/manual/html_node/emacs/H
 These shadow some related bindings in [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hideshow.html][Hideshow]], which contains other useful bindings, e.g.:
 - =C-c @ C-a=: Show all.
 
-Auto-hide integrates with =xref-find-definitions=, automatically showing function bodies when jumping to definitions (typically via =M-.=).  By default, pressing =M-.= repeatedly on the name of a function will toggle visibility of the function body.  You can disable this feature by setting =auto-hide-xref-integration= to =nil=.
+Auto-hide integrates with =xref-find-definitions=, automatically showing function bodies when jumping to definitions (typically via =M-.=).  Pressing =M-.= repeatedly on the name of a function will toggle visibility of the function body.  You can disable this feature by setting =auto-hide-xref-integration= to =nil=.
