@@ -15,6 +15,16 @@ Emacs 29.1 or later with tree-sitter support.
 
 Install =auto-hide= by downloading the source and using =M-x package-install-file=, or through your preferred package manager.  
 
+For example, using [[https://github.com/progfolio/elpaca][elpaca]], I install and configure it as follows:
+
+#+begin_src emacs-lisp
+(use-package auto-hide
+  :ensure (:host github :repo "ultronozm/auto-hide.el"
+                 :depth nil)
+  :config
+  (global-auto-hide-mode))
+#+end_src
+
 * Customization
 
 Customize =auto-hide-language-config= to add support for additional languages or modify existing configurations.  To customize which major modes use auto-hide, adjust the =auto-hide-modes= variable.
