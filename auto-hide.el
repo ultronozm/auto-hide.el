@@ -191,7 +191,7 @@ If `auto-hide-xref-integration' is non-nil, show the body of the
 function at point after calling `xref-find-definitions'.  If called
 twice in a row, toggle the visibility of the body instead."
   (let ((result (apply oldfun args)))
-    (when auto-hide-xref-integration
+    (when (and auto-hide-mode auto-hide-xref-integration)
       (if (eq last-command 'xref-find-definitions)
           (auto-hide-toggle-at-point)
         (auto-hide-show-at-point)))
