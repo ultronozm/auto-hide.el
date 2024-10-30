@@ -39,12 +39,17 @@ After installing the package, you can enable it globally with:
 
 This activates the [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hideshow.html][Hideshow]] package in the supported buffers and provides the following keybindings:
 
-- =C-c @ t=: Hide all function bodies in the current buffer
-- =C-c @ s=: Show the function body at point
-- =C-c @ d=: Hide the function body at point
-- =C-c @ e=: Toggle visibility of the function body at point
+| Keybinding | Command                     | Functionality                                   |
+|------------+-----------------------------+-------------------------------------------------|
+| =C-c @ t=  | =auto-hide-hide-all=        | Hide all function bodies in the current buffer  |
+| =C-c @ s=  | =auto-hide-show-at-point=   | Show the function body at point                 |
+| =C-c @ d=  | =auto-hide-hide-at-point=   | Hide the function body at point                 |
+| =C-c @ e=  | =auto-hide-toggle-at-point= | Toggle visibility of the function body at point |
 
 These shadow some related bindings in [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hideshow.html][Hideshow]], which contains other useful bindings, e.g.:
-- =C-c @ C-a=: Show all.
+
+| Keybinding  | Command       | Functionality |
+|-------------+---------------+---------------|
+| =C-c @ C-a= | =hs-show-all= | Show all      |
 
 Auto-hide integrates with =xref-find-definitions=, automatically showing function bodies when jumping to definitions (typically via =M-.=).  Pressing =M-.= repeatedly on the name of a function will toggle visibility of the function body.  You can disable this feature by setting =auto-hide-xref-integration= to =nil=.
