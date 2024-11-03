@@ -48,6 +48,8 @@
                      (body-field . "body")))
     (c++-ts-mode . ((function-node . "function_definition")
                     (body-field . "body")))
+    (c-ts-mode . ((function-node . "function_definition")
+		  (body-field . "body")))
     (js-ts-mode . ((function-node . "function_declaration")
                    (body-field . "body")))
     (python-ts-mode . ((function-node . "function_definition")
