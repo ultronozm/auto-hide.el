@@ -53,17 +53,20 @@
     (js-ts-mode . ((function-node . "function_declaration")
                    (body-field . "body")))
     (python-ts-mode . ((function-node . "function_definition")
-                       (body-field . "body"))))
+                       (body-field . "body")))
+    (go-ts-mode . ((function-node . ("function_declaration" "method_declaration"))
+                      (body-field . "body"))))
   "Configuration for function nodes and body fields in different languages.
 Each entry is a cons cell (MAJOR-MODE . CONFIG), where CONFIG is an
 alist with keys `function-node' and `body-field'.
 
-The value for `function-node' should be a string matching the
-tree-sitter node type for function definitions in the given language.
+The value for `function-node' should be a string or list of strings matching the
+tree-sitter node type(s) for function definitions in the given language.
 The value for `body-field' should be a string matching the field name
 for the function body within the function node."
   :type '(alist :key-type symbol
-                :value-type (alist :key-type symbol :value-type string)))
+           :value-type (alist :key-type symbol
+                         :value-type (choice string (repeat string)))))
 
 (defvar auto-hide-modes)
 
@@ -104,8 +107,12 @@ have a corresponding entry in `auto-hide-language-config'."
 Return list of cons cells (BEGIN . END) representing function body
 regions."
   (when-let* ((lang-config (alist-get major-mode auto-hide-language-config))
+              (function-node-types (alist-get 'function-node lang-config))
+              (function-node-types (if (listp function-node-types)
+                                       function-node-types
+                                     (list function-node-types)))
               (regexp (concat "\\`"
-                              (alist-get 'function-node lang-config)
+                              (regexp-opt function-node-types)
                               "\\'"))
               (body-field (alist-get 'body-field lang-config))
               (root (treesit-buffer-root-node))
@@ -125,12 +132,15 @@ regions."
   "Get the body for the function at point."
   (when-let* ((lang-config (alist-get major-mode
                                       auto-hide-language-config))
-              (function-node-type (alist-get 'function-node lang-config))
+              (function-node-types (alist-get 'function-node lang-config))
+              (function-node-types (if (listp function-node-types)
+                                       function-node-types
+                                     (list function-node-types)))
               (node (treesit-node-at (point)))
               (function-node (treesit-parent-until
                               node (lambda (n)
-                                     (string= (treesit-node-type n)
-                                              function-node-type))))
+                                     (member (treesit-node-type n)
+                                             function-node-types))))
               (body-field (alist-get 'body-field lang-config)))
     (auto-hide--body-of-node function-node body-field)))
 
